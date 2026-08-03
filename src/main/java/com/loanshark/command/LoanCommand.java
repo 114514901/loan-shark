@@ -54,6 +54,9 @@ public class LoanCommand implements CommandExecutor, TabCompleter {
             case "help":
                 showHelp(player);
                 break;
+            case "reload":
+                handleReload(sender);
+                break;
             default:
                 plugin.getLoanGUI().open(player);
                 break;
@@ -91,6 +94,17 @@ public class LoanCommand implements CommandExecutor, TabCompleter {
                         .replace("{next_interest}", nextInterestStr)));
     }
 
+    private void handleReload(CommandSender sender) {
+        if (!sender.hasPermission("loanshark.admin")) {
+            sender.sendMessage(ChatColor.RED + "你没有权限。");
+            return;
+        }
+        plugin.reloadConfig();
+        plugin.getLoanManager().loadConfig();
+        plugin.getPunishmentManager().loadConfig();
+        sender.sendMessage(ChatColor.GREEN + "LoanShark 配置已重载。");
+    }
+
     private void showHelp(Player player) {
         player.sendMessage(ChatColor.GOLD + "===== 高利贷帮助 =====");
         player.sendMessage(ChatColor.YELLOW + "/gaolidai " + ChatColor.GRAY + "- 打开高利贷GUI");
@@ -101,6 +115,7 @@ public class LoanCommand implements CommandExecutor, TabCompleter {
             player.sendMessage(ChatColor.YELLOW + "/gaolidai admin remove <玩家> <金额> " + ChatColor.GRAY + "- 减少贷款");
             player.sendMessage(ChatColor.YELLOW + "/gaolidai admin info <玩家> " + ChatColor.GRAY + "- 查看他人贷款");
             player.sendMessage(ChatColor.YELLOW + "/gaolidai admin reset <玩家> " + ChatColor.GRAY + "- 清除所有贷款");
+            player.sendMessage(ChatColor.YELLOW + "/gaolidai reload " + ChatColor.GRAY + "- 重载配置");
         }
     }
 
@@ -228,6 +243,7 @@ public class LoanCommand implements CommandExecutor, TabCompleter {
             String prefix = args[0].toLowerCase();
             if ("info".startsWith(prefix)) completions.add("info");
             if ("help".startsWith(prefix)) completions.add("help");
+            if ("reload".startsWith(prefix)) completions.add("reload");
             if (sender.hasPermission("loanshark.admin")) {
                 if ("dayun".startsWith(prefix)) completions.add("dayun");
                 if ("admin".startsWith(prefix)) completions.add("admin");
