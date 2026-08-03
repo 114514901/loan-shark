@@ -1,0 +1,9 @@
+{
+  "comparator_output": 15,
+  "description": {
+    "translate": "",
+    "fallback": "大运降临"
+  },
+  "length_in_seconds": 168.95,
+  "sound_event": "minecraft:loanshark.punishment"
+}

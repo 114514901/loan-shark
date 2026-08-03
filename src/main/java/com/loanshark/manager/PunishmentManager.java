@@ -5,8 +5,12 @@ import com.loanshark.model.LoanData;
 import org.bukkit.*;
 import org.bukkit.entity.Minecart;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.util.Vector;
+
+import io.papermc.paper.datacomponent.DataComponentTypes;
+import io.papermc.paper.datacomponent.item.JukeboxPlayable;
 
 import java.util.*;
 
@@ -121,6 +125,8 @@ public class PunishmentManager {
                     world.strikeLightningEffect(player.getLocation());
                     world.spawnParticle(Particle.EXPLOSION, player.getLocation(), 5);
 
+                    dropDisc(player);
+
                     plugin.getLoanManager().reduceLoanOnPunishment(loanData);
 
                     String executedMsg = plugin.getConfig().getString("messages.punishment_executed",
@@ -177,6 +183,16 @@ public class PunishmentManager {
                 plays++;
             }
         }.runTaskTimer(plugin, 0L, 20L);
+    }
+
+    private void dropDisc(Player player) {
+        ItemStack disc = ItemStack.of(Material.MUSIC_DISC_13);
+        disc.setData(DataComponentTypes.JUKEBOX_PLAYABLE,
+                JukeboxPlayable.jukeboxPlayable()
+                        .jukeboxSong(NamespacedKey.fromString("loanshark:dayun"))
+                        .showInTooltip(true)
+                        .build());
+        player.getWorld().dropItemNaturally(player.getLocation(), disc);
     }
 
     private void cleanupPunishment(Player player, Minecart minecart) {
