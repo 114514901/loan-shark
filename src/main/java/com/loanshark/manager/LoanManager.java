@@ -159,6 +159,17 @@ public class LoanManager {
         LoanData data = getLoanData(player);
         if (!data.hasPassiveLoan()) return;
 
+        double balance = getBalance(player);
+        if (balance >= 0) {
+            economy.withdrawPlayer(player, data.getPassiveLoanAmount());
+            data.setPassiveLoanAmount(0);
+            data.setPassiveLoanTimestamp(0);
+            data.setLastPassiveInterestCalc(0);
+            sendMessage(player, plugin.getConfig().getString("messages.passive_loan_repaid", "&a你的被动高利贷已还清！"));
+            save(data);
+            return;
+        }
+
         long now = System.currentTimeMillis();
         if (data.getLastPassiveInterestCalc() == 0) {
             data.setLastPassiveInterestCalc(now);
@@ -166,32 +177,16 @@ public class LoanManager {
         long elapsed = now - data.getLastPassiveInterestCalc();
         int periods = (int) (elapsed / interestIntervalMs);
         if (periods > 0) {
-            double balance = getBalance(player);
             for (int i = 0; i < periods; i++) {
                 double interest = Math.round(data.getPassiveLoanAmount() * interestRate * 100.0) / 100.0;
-                if (balance >= interest && balance > 0) {
-                    economy.withdrawPlayer(player, interest);
-                    balance -= interest;
-                } else {
-                    if (balance > 0) {
-                        economy.withdrawPlayer(player, balance);
-                        interest -= balance;
-                        balance = 0;
-                    }
-                    data.setPassiveLoanAmount(data.getPassiveLoanAmount() + interest);
-                }
+                economy.withdrawPlayer(player, interest);
+                data.setPassiveLoanAmount(data.getPassiveLoanAmount() + interest);
             }
             data.setLastPassiveInterestCalc(data.getLastPassiveInterestCalc() + (long) periods * interestIntervalMs);
         }
 
-        double balance = getBalance(player);
-        if (balance > 0 && data.hasPassiveLoan()) {
-            double payment = Math.min(balance, data.getPassiveLoanAmount());
-            economy.withdrawPlayer(player, payment);
-            data.setPassiveLoanAmount(data.getPassiveLoanAmount() - payment);
-        }
-
-        if (data.getPassiveLoanAmount() < 0.01) {
+        balance = getBalance(player);
+        if (balance >= 0) {
             data.setPassiveLoanAmount(0);
             data.setPassiveLoanTimestamp(0);
             data.setLastPassiveInterestCalc(0);
