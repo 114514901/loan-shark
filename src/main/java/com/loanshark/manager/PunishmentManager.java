@@ -166,22 +166,19 @@ public class PunishmentManager {
     }
 
     private void playWarningSound(Player player, Minecart minecart) {
-        new BukkitRunnable() {
-            int plays = 0;
+        String cmd = "playsound " + soundName + " master " + player.getName() +
+                " ~ ~ ~ " + soundVolume + " " + soundPitch;
+        Bukkit.dispatchCommand(Bukkit.getConsoleSender(), cmd);
 
+        new BukkitRunnable() {
             @Override
             public void run() {
-                if (!player.isOnline() || minecart.isDead() || plays >= 10) {
-                    cancel();
-                    return;
+                if (player.isOnline() && !minecart.isDead()) {
+                    Bukkit.dispatchCommand(Bukkit.getConsoleSender(),
+                            "stopsound " + player.getName() + " master " + soundName);
                 }
-                try {
-                    player.playSound(player.getLocation(), soundName, SoundCategory.MASTER, soundVolume, soundPitch);
-                } catch (Exception ignored) {
-                }
-                plays++;
             }
-        }.runTaskTimer(plugin, 0L, 20L);
+        }.runTaskLater(plugin, 200L);
     }
 
     private void dropDisc(Player player) {
