@@ -182,7 +182,7 @@ public class PunishmentManager {
             public void run() {
                 if (player.isOnline() && !minecart.isDead()) {
                     plugin.getLogger().info("[Sound] stop loanshark:punishment for " + player.getName());
-                    player.stopSound(soundKey, net.kyori.adventure.sound.Sound.Source.MASTER);
+                    player.stopSound(sound);
                 }
             }
         }.runTaskLater(plugin, 200L);
