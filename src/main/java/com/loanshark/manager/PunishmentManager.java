@@ -187,9 +187,10 @@ public class PunishmentManager {
 
     private void dropDisc(Player player) {
         ItemStack disc = ItemStack.of(Material.MUSIC_DISC_13);
+        org.bukkit.JukeboxSong song = org.bukkit.Registry.JUKEBOX_SONG.get(
+                NamespacedKey.fromString("loanshark:dayun"));
         disc.setData(DataComponentTypes.JUKEBOX_PLAYABLE,
-                JukeboxPlayable.jukeboxPlayable()
-                        .jukeboxSong(NamespacedKey.fromString("loanshark:dayun"))
+                JukeboxPlayable.jukeboxPlayable(song)
                         .showInTooltip(true)
                         .build());
         disc.setData(DataComponentTypes.ENCHANTMENT_GLINT_OVERRIDE, true);
