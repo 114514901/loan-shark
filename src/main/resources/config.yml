@@ -1,0 +1,43 @@
+settings:
+  interest_rate: 0.50
+  interest_interval_seconds: 1200
+  overdue_days: 3
+  passive_loan_max: 10000.0
+  punishment_loan_reduction: 0.20
+  punishment_cooldown_seconds: 1200
+  minecart_speed: 2.5
+  countdown_seconds: 5
+  punishment_distance: 10
+  borrow_presets:
+    - 100
+    - 500
+    - 1000
+    - 5000
+  repay_presets:
+    - 100
+    - 500
+    - 1000
+    - 0
+
+messages:
+  prefix: "&8[&c高利贷&8]&7 "
+  negative_balance_warning: "&c警告，你的余额已超支，我们将为您提供高利贷服务，请及时还款！"
+  passive_loan_given: "&e已为你提供被动高利贷: &c{days}&e 个游戏日内未还清将触发惩罚！"
+  passive_loan_repaid: "&a你的被动高利贷已还清！"
+  active_loan_taken: "&e你借了 &a${amount}&e！当前利率: &c{rate}%&e/天，利滚利，&c{days}&e天后不还将触发惩罚！"
+  active_loan_repaid: "&a你已还清全部贷款！"
+  active_loan_partial: "&a你已偿还 &a${amount}&e，剩余贷款: &c${remaining}"
+  overdue_warning: "&c⚠ 你的贷款已逾期 {days} 个游戏日！请尽快还款！"
+  punishment_announce: "&c&l【高利贷】&r &4{player} &c贷款逾期未还！大运即将来临！"
+  punishment_countdown: "&c倒计时: &4&l{seconds}&c 秒！"
+  punishment_executed: "&4&l大运降临！&r &c{player} &4因逾期未还贷款被制裁！贷款减少20%！"
+  insufficient_funds_borrow: "&c余额不足，无法偿还贷款！"
+  insufficient_balance_repay: "&c你没有足够的钱来还款！"
+  auto_deducted: "&c【高利贷】: &e已自动从你的账户扣除 &c${amount} &e用于偿还贷款。"
+  no_loan: "&7你当前没有贷款。"
+  loan_info: "&e===== &c高利贷信息 &e=====\n&7主动贷款: &c${active}\n&7被动贷款: &c${passive}\n&7利率: &c{rate}%&7/天\n&7逾期天数: &c{overdue}\n&7下次利息计算: &c{next_interest}"
+
+sound:
+  punishment_sound: "loanshark:punishment"
+  volume: 1.0
+  pitch: 1.0

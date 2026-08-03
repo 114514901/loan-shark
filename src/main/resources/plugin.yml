@@ -1,0 +1,18 @@
+name: LoanShark
+version: '1.0'
+main: com.loanshark.LoanSharkPlugin
+api-version: '1.21'
+depend: [Vault]
+authors: ['wp:1442']
+description: '高利贷插件 - 主动/被动贷款，利滚利，大运惩罚'
+commands:
+  gaolidai:
+    description: '打开高利贷GUI - /gaolidai 打开贷款界面, /gaolidai info 查看贷款状态'
+    aliases: [loanshark, loan, gld]
+permissions:
+  loanshark.use:
+    description: '允许使用高利贷服务'
+    default: true
+  loanshark.admin:
+    description: '管理员权限 - 查看/修改他人贷款'
+    default: op
