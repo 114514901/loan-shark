@@ -35,7 +35,7 @@ public class PunishmentManager {
         this.countdownSeconds = plugin.getConfig().getInt("settings.countdown_seconds", 5);
         this.punishmentDistance = plugin.getConfig().getDouble("settings.punishment_distance", 10);
         this.minecartSpeed = plugin.getConfig().getDouble("settings.minecart_speed", 2.5);
-        this.soundName = plugin.getConfig().getString("sound.punishment_sound", "loanshark.punishment");
+        this.soundName = plugin.getConfig().getString("sound.punishment_sound", "minecraft:loanshark.punishment");
         this.soundVolume = (float) plugin.getConfig().getDouble("sound.volume", 1.0);
         this.soundPitch = (float) plugin.getConfig().getDouble("sound.pitch", 1.0);
     }
