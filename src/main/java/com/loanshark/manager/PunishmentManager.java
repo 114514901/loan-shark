@@ -192,6 +192,9 @@ public class PunishmentManager {
                         .jukeboxSong(NamespacedKey.fromString("loanshark:dayun"))
                         .showInTooltip(true)
                         .build());
+        disc.setData(DataComponentTypes.ENCHANTMENT_GLINT_OVERRIDE, true);
+        disc.editMeta(meta -> meta.displayName(
+                net.kyori.adventure.text.Component.text("大运唱片", net.kyori.adventure.text.format.NamedTextColor.GOLD)));
         player.getWorld().dropItemNaturally(player.getLocation(), disc);
     }
 
