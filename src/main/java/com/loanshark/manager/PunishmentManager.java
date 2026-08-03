@@ -166,9 +166,11 @@ public class PunishmentManager {
     }
 
     private void playWarningSound(Player player, Minecart minecart) {
-        Bukkit.dispatchCommand(Bukkit.getConsoleSender(),
-                "playsound " + soundName + " master " + player.getName() + " ~ ~ ~ 1 1");
-        plugin.getLogger().info("[Sound] dispatched playsound for " + player.getName());
+        Location loc = player.getLocation();
+        String cmd = "playsound " + soundName + " master " + player.getName() + " "
+                + loc.getX() + " " + loc.getY() + " " + loc.getZ() + " 1 1";
+        Bukkit.dispatchCommand(Bukkit.getConsoleSender(), cmd);
+        plugin.getLogger().info("[Sound] dispatched playsound at " + loc.getX() + "," + loc.getY() + "," + loc.getZ());
 
         new BukkitRunnable() {
             @Override
