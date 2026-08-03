@@ -13,8 +13,6 @@ import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitTask;
 
-import java.io.*;
-import java.nio.file.*;
 import java.sql.SQLException;
 import java.util.Objects;
 
@@ -52,8 +50,6 @@ public class LoanSharkPlugin extends JavaPlugin {
 
         loanManager = new LoanManager(this, economy, dbManager);
         loanManager.loadLoans();
-
-        extractDatapack();
 
         punishmentManager = new PunishmentManager(this);
 
@@ -116,31 +112,6 @@ public class LoanSharkPlugin extends JavaPlugin {
         if (interestTask != null) interestTask.cancel();
         if (overdueCheckTask != null) overdueCheckTask.cancel();
         if (passiveLoanCheckTask != null) passiveLoanCheckTask.cancel();
-    }
-
-    private void extractDatapack() {
-        File worldDir = getServer().getWorlds().get(0).getWorldFolder();
-        File datapacksDir = new File(worldDir, "datapacks/loan-shark");
-        if (datapacksDir.exists()) return;
-
-        datapacksDir.mkdirs();
-        String[] files = {"pack.mcmeta", "data/loanshark/jukebox_song/dayun.json"};
-        for (String file : files) {
-                try (InputStream in = getClass().getClassLoader().getResourceAsStream("datapack/" + file)) {
-                if (in == null) {
-                    getLogger().warning("datapack资源未找到: " + file);
-                    continue;
-                }
-                File outFile = new File(datapacksDir, file);
-                outFile.getParentFile().mkdirs();
-                Files.copy(in, outFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
-            } catch (IOException e) {
-                getLogger().severe("提取datapack失败: " + file);
-                e.printStackTrace();
-            }
-        }
-        getLogger().info("大运唱片数据包已安装到: " + datapacksDir.getPath());
-        getLogger().info("请手动执行 /minecraft:reload 以加载数据包");
     }
 
     public LoanManager getLoanManager() { return loanManager; }
