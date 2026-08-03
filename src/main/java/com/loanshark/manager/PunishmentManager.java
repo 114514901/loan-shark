@@ -166,7 +166,7 @@ public class PunishmentManager {
 
             @Override
             public void run() {
-                if (!player.isOnline() || minecart.isDead() || plays >= countdownSeconds) {
+                if (!player.isOnline() || minecart.isDead() || plays >= 10) {
                     cancel();
                     return;
                 }
@@ -189,6 +189,12 @@ public class PunishmentManager {
 
     public boolean isInPunishment(UUID uuid) {
         return playersInPunishment.contains(uuid);
+    }
+
+    public void triggerDayun(Player player) {
+        LoanData dummy = new LoanData(player.getUniqueId());
+        dummy.setActiveLoanAmount(0);
+        triggerPunishment(player, dummy);
     }
 
     public void cancelPunishment(Player player) {

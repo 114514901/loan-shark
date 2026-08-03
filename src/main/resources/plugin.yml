@@ -7,7 +7,7 @@ authors: ['wp:1442']
 description: '高利贷插件 - 主动/被动贷款，利滚利，大运惩罚'
 commands:
   gaolidai:
-    description: '打开高利贷GUI - /gaolidai 打开贷款界面, /gaolidai info 查看贷款状态'
+    description: '打开高利贷GUI - /gaolidai 打开贷款界面, /gaolidai info 查看状态, /gaolidai dayun <玩家> 释放大运'
     aliases: [loanshark, loan, gld]
 permissions:
   loanshark.use:
