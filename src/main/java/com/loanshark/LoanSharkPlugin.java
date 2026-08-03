@@ -105,7 +105,7 @@ public class LoanSharkPlugin extends JavaPlugin {
                 }
                 loanManager.checkAndUpdatePassiveLoanRepayment(player);
             }
-        }, 100L, 100L);
+        }, 40L, 40L);
     }
 
     private void stopScheduledTasks() {

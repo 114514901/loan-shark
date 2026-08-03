@@ -245,6 +245,8 @@ public class LoanManager {
         double reduction = plugin.getConfig().getDouble("settings.punishment_loan_reduction", 0.20);
         if (data.hasActiveLoan()) {
             data.setActiveLoanAmount(data.getActiveLoanAmount() * (1 - reduction));
+            data.setActiveLoanTimestamp(System.currentTimeMillis());
+            data.setLastInterestCalc(System.currentTimeMillis());
             if (data.getActiveLoanAmount() < 0.01) {
                 data.setActiveLoanAmount(0);
                 data.setActiveLoanTimestamp(0);
@@ -253,6 +255,8 @@ public class LoanManager {
         }
         if (data.hasPassiveLoan()) {
             data.setPassiveLoanAmount(data.getPassiveLoanAmount() * (1 - reduction));
+            data.setPassiveLoanTimestamp(System.currentTimeMillis());
+            data.setLastPassiveInterestCalc(System.currentTimeMillis());
             if (data.getPassiveLoanAmount() < 0.01) {
                 data.setPassiveLoanAmount(0);
                 data.setPassiveLoanTimestamp(0);
