@@ -38,6 +38,6 @@ messages:
   loan_info: "&e===== &c高利贷信息 &e=====\n&7主动贷款: &c${active}\n&7被动贷款: &c${passive}\n&7利率: &c{rate}%&7/天\n&7逾期天数: &c{overdue}\n&7下次利息计算: &c{next_interest}"
 
 sound:
-  punishment_sound: "loanshark:punishment"
+  punishment_sound: "minecraft:loanshark.punishment"
   volume: 1.0
   pitch: 1.0
