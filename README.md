@@ -37,11 +37,7 @@
 
 ## 数据包
 
-大运唱片需要额外安装数据包（仅1.21+客户端可用）：
-
-将 `datapack/` 目录复制到世界文件夹的 `datapacks/loan-shark/`，然后执行 `/minecraft:reload`。
-
-被大运撞死后会掉落一张带附魔光的"大运唱片"，塞唱片机播放。
+大运唱片数据包位于独立仓库：将 `loan-shark-datapack/` 复制到世界文件夹的 `datapacks/loan-shark/`，然后执行 `/minecraft:reload`。
 
 ## 资源包
 
