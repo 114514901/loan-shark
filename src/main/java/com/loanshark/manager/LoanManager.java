@@ -161,7 +161,6 @@ public class LoanManager {
 
         double balance = getBalance(player);
         if (balance >= 0) {
-            economy.withdrawPlayer(player, data.getPassiveLoanAmount());
             data.setPassiveLoanAmount(0);
             data.setPassiveLoanTimestamp(0);
             data.setLastPassiveInterestCalc(0);
@@ -179,7 +178,6 @@ public class LoanManager {
         if (periods > 0) {
             for (int i = 0; i < periods; i++) {
                 double interest = Math.round(data.getPassiveLoanAmount() * interestRate * 100.0) / 100.0;
-                economy.withdrawPlayer(player, interest);
                 data.setPassiveLoanAmount(data.getPassiveLoanAmount() + interest);
             }
             data.setLastPassiveInterestCalc(data.getLastPassiveInterestCalc() + (long) periods * interestIntervalMs);
