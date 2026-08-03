@@ -10,7 +10,6 @@ import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.util.Vector;
 
 import io.papermc.paper.datacomponent.DataComponentTypes;
-import io.papermc.paper.datacomponent.item.JukeboxPlayable;
 
 import java.util.*;
 
@@ -187,12 +186,6 @@ public class PunishmentManager {
 
     private void dropDisc(Player player) {
         ItemStack disc = ItemStack.of(Material.MUSIC_DISC_13);
-        org.bukkit.JukeboxSong song = org.bukkit.Registry.JUKEBOX_SONG.get(
-                NamespacedKey.fromString("loanshark:dayun"));
-        disc.setData(DataComponentTypes.JUKEBOX_PLAYABLE,
-                JukeboxPlayable.jukeboxPlayable(song)
-                        .showInTooltip(true)
-                        .build());
         disc.setData(DataComponentTypes.ENCHANTMENT_GLINT_OVERRIDE, true);
         disc.editMeta(meta -> meta.displayName(
                 net.kyori.adventure.text.Component.text("大运唱片", net.kyori.adventure.text.format.NamedTextColor.GOLD)));

@@ -35,10 +35,6 @@
 - Paper 1.21.x（或兼容服务端）
 - Vault（经济前置）
 
-## 数据包
-
-大运唱片数据包位于独立仓库：将 `loan-shark-datapack/` 复制到世界文件夹的 `datapacks/loan-shark/`，然后执行 `/minecraft:reload`。
-
 ## 资源包
 
 音频文件已集成到汉化资源包 `yggdrasil-zh-cn` 中，作为服务器资源包下发即可启用惩罚音效。
