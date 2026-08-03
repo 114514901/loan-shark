@@ -166,23 +166,16 @@ public class PunishmentManager {
     }
 
     private void playWarningSound(Player player, Minecart minecart) {
-        net.kyori.adventure.key.Key soundKey = net.kyori.adventure.key.Key.key("loanshark", "punishment");
-        net.kyori.adventure.sound.Sound sound = net.kyori.adventure.sound.Sound.sound()
-                .type(soundKey)
-                .source(net.kyori.adventure.sound.Sound.Source.MASTER)
-                .volume(soundVolume)
-                .pitch(soundPitch)
-                .build();
-
-        plugin.getLogger().info("[Sound] playing loanshark:punishment for " + player.getName());
-        player.playSound(sound, net.kyori.adventure.sound.Sound.Emitter.self());
+        Bukkit.dispatchCommand(Bukkit.getConsoleSender(),
+                "playsound " + soundName + " master " + player.getName() + " ~ ~ ~ 1 1");
+        plugin.getLogger().info("[Sound] dispatched playsound for " + player.getName());
 
         new BukkitRunnable() {
             @Override
             public void run() {
                 if (player.isOnline() && !minecart.isDead()) {
-                    plugin.getLogger().info("[Sound] stop loanshark:punishment for " + player.getName());
-                    player.stopSound(sound);
+                    Bukkit.dispatchCommand(Bukkit.getConsoleSender(),
+                            "stopsound " + player.getName());
                 }
             }
         }.runTaskLater(plugin, 200L);
