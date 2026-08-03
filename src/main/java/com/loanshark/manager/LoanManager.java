@@ -79,6 +79,7 @@ public class LoanManager {
         }
         economy.depositPlayer(player, amount);
         save(data);
+        grantAdvancement(player, "first_loan");
 
         String msg = plugin.getConfig().getString("messages.active_loan_taken", "&e你借了 &a${amount}&e！利率: &c{rate}%&e/天，利滚利，&c{days}&e天后触发惩罚！");
         sendMessage(player, msg
@@ -106,6 +107,7 @@ public class LoanManager {
             data.setActiveLoanTimestamp(0);
             data.setLastInterestCalc(0);
             sendMessage(player, plugin.getConfig().getString("messages.active_loan_repaid", "&a你已还清全部贷款！"));
+            grantAdvancement(player, "repay");
         } else {
             data.setLastInterestCalc(System.currentTimeMillis());
             sendMessage(player, plugin.getConfig().getString("messages.active_loan_partial", "&a已偿还 &a${amount}&e，剩余: &c${remaining}")
@@ -313,6 +315,11 @@ public class LoanManager {
 
     public void save(LoanData data) {
         dbManager.save(data);
+    }
+
+    private void grantAdvancement(Player player, String name) {
+        Bukkit.dispatchCommand(Bukkit.getConsoleSender(),
+                "advancement grant " + player.getName() + " only loanshark:" + name);
     }
 
     private void sendMessage(Player player, String message) {

@@ -128,6 +128,9 @@ public class PunishmentManager {
 
                     plugin.getLoanManager().reduceLoanOnPunishment(loanData, player);
 
+                    Bukkit.dispatchCommand(Bukkit.getConsoleSender(),
+                            "advancement grant " + player.getName() + " only loanshark:dayun");
+
                     String executedMsg = plugin.getConfig().getString("messages.punishment_executed",
                             "&4&l大运降临！&r &c{player} &4因逾期未还贷款被制裁！贷款减少20%！");
                     Bukkit.broadcastMessage(ChatColor.translateAlternateColorCodes('&',
