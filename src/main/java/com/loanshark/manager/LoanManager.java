@@ -241,10 +241,12 @@ public class LoanManager {
         }
     }
 
-    public void reduceLoanOnPunishment(LoanData data) {
+    public void reduceLoanOnPunishment(LoanData data, Player player) {
         double reduction = plugin.getConfig().getDouble("settings.punishment_loan_reduction", 0.20);
         if (data.hasActiveLoan()) {
-            data.setActiveLoanAmount(data.getActiveLoanAmount() * (1 - reduction));
+            double forgiven = data.getActiveLoanAmount() * reduction;
+            data.setActiveLoanAmount(data.getActiveLoanAmount() - forgiven);
+            economy.depositPlayer(player, forgiven);
             data.setActiveLoanTimestamp(System.currentTimeMillis());
             data.setLastInterestCalc(System.currentTimeMillis());
             if (data.getActiveLoanAmount() < 0.01) {
@@ -254,7 +256,9 @@ public class LoanManager {
             }
         }
         if (data.hasPassiveLoan()) {
-            data.setPassiveLoanAmount(data.getPassiveLoanAmount() * (1 - reduction));
+            double forgiven = data.getPassiveLoanAmount() * reduction;
+            data.setPassiveLoanAmount(data.getPassiveLoanAmount() - forgiven);
+            economy.depositPlayer(player, forgiven);
             data.setPassiveLoanTimestamp(System.currentTimeMillis());
             data.setLastPassiveInterestCalc(System.currentTimeMillis());
             if (data.getPassiveLoanAmount() < 0.01) {

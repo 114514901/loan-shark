@@ -126,7 +126,7 @@ public class PunishmentManager {
 
                     dropDisc(player);
 
-                    plugin.getLoanManager().reduceLoanOnPunishment(loanData);
+                    plugin.getLoanManager().reduceLoanOnPunishment(loanData, player);
 
                     String executedMsg = plugin.getConfig().getString("messages.punishment_executed",
                             "&4&l大运降临！&r &c{player} &4因逾期未还贷款被制裁！贷款减少20%！");

@@ -30,7 +30,7 @@ messages:
   overdue_warning: "&c⚠ 你的贷款已逾期 {days} 个游戏日！请尽快还款！"
   punishment_announce: "&c&l【高利贷】&r &4{player} &c贷款逾期未还！大运即将来临！"
   punishment_countdown: "&c倒计时: &4&l{seconds}&c 秒！"
-  punishment_executed: "&4&l大运降临！&r &c{player} &4因逾期未还贷款被制裁！贷款减少20%！"
+  punishment_executed: "&4&l大运降临！&r &c{player} &4因逾期未还贷款被制裁！贷款减少20%并退回该部分余额！"
   insufficient_funds_borrow: "&c余额不足，无法偿还贷款！"
   insufficient_balance_repay: "&c你没有足够的钱来还款！"
   auto_deducted: "&c【高利贷】: &e已自动从你的账户扣除 &c${amount} &e用于偿还贷款。"
