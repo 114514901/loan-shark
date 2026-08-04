@@ -171,7 +171,7 @@ public class PunishmentManager {
     private void playWarningSound(Player player, Minecart minecart) {
         Location loc = player.getLocation();
         String cmd = "playsound " + soundName + " master " + player.getName() + " "
-                + loc.getX() + " " + loc.getY() + " " + loc.getZ() + " 1 1";
+                + loc.getX() + " " + loc.getY() + " " + loc.getZ() + " 100 1";
         Bukkit.dispatchCommand(Bukkit.getConsoleSender(), cmd);
         plugin.getLogger().info("[Sound] dispatched playsound at " + loc.getX() + "," + loc.getY() + "," + loc.getZ());
 
@@ -180,7 +180,7 @@ public class PunishmentManager {
             public void run() {
                 if (player.isOnline() && !minecart.isDead()) {
                     Bukkit.dispatchCommand(Bukkit.getConsoleSender(),
-                            "stopsound " + player.getName());
+                            "stopsound " + player.getName() + " * " + soundName);
                 }
             }
         }.runTaskLater(plugin, 200L);
