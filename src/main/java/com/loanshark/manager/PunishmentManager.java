@@ -176,10 +176,10 @@ public class PunishmentManager {
         Bukkit.dispatchCommand(Bukkit.getConsoleSender(), cmd);
         plugin.getLogger().info("[Sound] dispatched playsound at " + loc.getX() + "," + loc.getY() + "," + loc.getZ());
 
-        new BukkitRunnable() {
+         new BukkitRunnable() {
             @Override
             public void run() {
-                if (player.isOnline() && !minecart.isDead()) {
+                if (player.isOnline()) {
                     Bukkit.dispatchCommand(Bukkit.getConsoleSender(),
                             "stopsound " + player.getName());
                 }
