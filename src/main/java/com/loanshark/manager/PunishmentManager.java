@@ -181,7 +181,7 @@ public class PunishmentManager {
             public void run() {
                 if (player.isOnline() && !minecart.isDead()) {
                     Bukkit.dispatchCommand(Bukkit.getConsoleSender(),
-                            "stopsound " + player.getName() + " master " + soundName);
+                            "stopsound " + player.getName() + " " + soundName);
                 }
             }
         }.runTaskLater(plugin, 200L);
