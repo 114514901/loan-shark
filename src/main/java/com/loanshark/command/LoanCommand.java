@@ -24,6 +24,17 @@ public class LoanCommand implements CommandExecutor, TabCompleter {
 
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
+        try {
+            return handle(sender, cmd, label, args);
+        } catch (Exception e) {
+            sender.sendMessage(ChatColor.RED + "命令执行出错，请联系管理员。");
+            Bukkit.getLogger().severe("[LoanShark] Command error: " + e.getMessage());
+            e.printStackTrace();
+            return true;
+        }
+    }
+
+    private boolean handle(CommandSender sender, Command cmd, String label, String[] args) {
         if (args.length >= 1 && args[0].equalsIgnoreCase("dayun")) {
             return handleDayun(sender, args);
         }
