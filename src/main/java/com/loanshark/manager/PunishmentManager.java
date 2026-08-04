@@ -181,7 +181,7 @@ public class PunishmentManager {
             public void run() {
                 if (player.isOnline() && !minecart.isDead()) {
                     Bukkit.dispatchCommand(Bukkit.getConsoleSender(),
-                            "stopsound " + player.getName() + " * " + soundName);
+                            "stopsound " + player.getName() + " master " + soundName);
                 }
             }
         }.runTaskLater(plugin, 200L);
@@ -192,7 +192,7 @@ public class PunishmentManager {
         JukeboxSong song = Registry.JUKEBOX_SONG.get(NamespacedKey.fromString("loanshark:dayun"));
         if (song != null) {
             disc.setData(DataComponentTypes.JUKEBOX_PLAYABLE,
-                    JukeboxPlayable.jukeboxPlayable(song).showInTooltip(true).build());
+                    JukeboxPlayable.jukeboxPlayable(song).build());
         }
         disc.setData(DataComponentTypes.ENCHANTMENT_GLINT_OVERRIDE, true);
         disc.editMeta(meta -> meta.displayName(
