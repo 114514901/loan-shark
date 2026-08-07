@@ -13,6 +13,7 @@ import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.event.vehicle.VehicleEnterEvent;
+import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
@@ -30,6 +31,15 @@ public class LoanListener implements Listener {
     public void onVehicleEnter(VehicleEnterEvent event) {
         if (!(event.getEntered() instanceof Player)) return;
         if (event.getVehicle() instanceof Minecart minecart
+                && minecart.getCustomName() != null
+                && minecart.getCustomName().contains("大运")) {
+            event.setCancelled(true);
+        }
+    }
+
+    @EventHandler
+    public void onEntityDamage(EntityDamageEvent event) {
+        if (event.getEntity() instanceof Minecart minecart
                 && minecart.getCustomName() != null
                 && minecart.getCustomName().contains("大运")) {
             event.setCancelled(true);
