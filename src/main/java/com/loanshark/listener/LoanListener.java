@@ -12,6 +12,7 @@ import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
+import org.bukkit.event.vehicle.VehicleEnterEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
@@ -23,6 +24,16 @@ public class LoanListener implements Listener {
 
     public LoanListener(LoanSharkPlugin plugin) {
         this.plugin = plugin;
+    }
+
+    @EventHandler
+    public void onVehicleEnter(VehicleEnterEvent event) {
+        if (!(event.getEntered() instanceof Player)) return;
+        if (event.getVehicle() instanceof Minecart minecart
+                && minecart.getCustomName() != null
+                && minecart.getCustomName().contains("大运")) {
+            event.setCancelled(true);
+        }
     }
 
     @EventHandler
