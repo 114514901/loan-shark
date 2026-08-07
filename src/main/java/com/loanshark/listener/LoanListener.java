@@ -38,15 +38,6 @@ public class LoanListener implements Listener {
     }
 
     @EventHandler
-    public void onEntityDamage(EntityDamageEvent event) {
-        if (event.getEntity() instanceof Minecart minecart
-                && minecart.getCustomName() != null
-                && minecart.getCustomName().contains("大运")) {
-            event.setCancelled(true);
-        }
-    }
-
-    @EventHandler
     public void onPlayerJoin(PlayerJoinEvent event) {
         Player player = event.getPlayer();
         LoanData loanData = plugin.getLoanManager().getLoanData(player);

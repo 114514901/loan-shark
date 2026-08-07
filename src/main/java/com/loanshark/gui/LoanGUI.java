@@ -67,7 +67,7 @@ public class LoanGUI {
         for (int i = 45; i < 54; i++) {
             inv.setItem(i, createGlass(btnColor, " "));
         }
-        for (int i = 0; i < 9; i++) {
+        for (int i = 0; i < 6; i++) {
             int rowStart = i * 9;
             if (inv.getItem(rowStart) == null) inv.setItem(rowStart, createGlass(Material.GRAY_STAINED_GLASS_PANE, " "));
             if (inv.getItem(rowStart + 8) == null) inv.setItem(rowStart + 8, createGlass(Material.GRAY_STAINED_GLASS_PANE, " "));
